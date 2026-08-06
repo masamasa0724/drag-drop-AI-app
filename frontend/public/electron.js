@@ -1,0 +1,68 @@
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
+const path = require('path');
+const isDev = require('electron-is-dev');
+const axios = require('axios');
+
+let mainWindow;
+
+function createWindow() {
+  mainWindow = new BrowserWindow({
+    width: 1200,
+    height: 800,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: false,
+      contextIsolation: true,
+    },
+  });
+
+  const startUrl = isDev
+    ? 'http://localhost:3000'
+    : `file://${path.join(__dirname, '../build/index.html')}`;
+
+  mainWindow.loadURL(startUrl);
+
+  if (isDev) {
+    mainWindow.webContents.openDevTools();
+  }
+
+  mainWindow.on('closed', () => {
+    mainWindow = null;
+  });
+}
+
+app.on('ready', createWindow);
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
+});
+
+app.on('activate', () => {
+  if (mainWindow === null) {
+    createWindow();
+  }
+});
+
+// IPC handlers
+ipcMain.handle('process-files', async (event, files, options) => {
+  try {
+    const response = await axios.post('http://localhost:5000/api/process', {
+      files,
+      options,
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error processing files:', error);
+    throw error;
+  }
+});
+
+ipcMain.handle('select-save-path', async () => {
+  const result = await dialog.showSaveDialog(mainWindow, {
+    defaultPath: 'data.xlsx',
+    filters: [{ name: 'Excel Files', extensions: ['xlsx'] }],
+  });
+  return result.filePath;
+});

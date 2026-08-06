@@ -1,0 +1,60 @@
+.option-panel {
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.option-panel h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: #333;
+}
+
+.option-item {
+  margin-bottom: 16px;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.checkbox input {
+  display: none;
+}
+
+.checkmark {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #007bff;
+  border-radius: 4px;
+  margin-right: 10px;
+  transition: all 0.2s ease;
+}
+
+.checkbox input:checked + .checkmark {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.checkbox input:checked + .checkmark::after {
+  content: '✓';
+  display: block;
+  color: white;
+  text-align: center;
+  line-height: 16px;
+  font-weight: bold;
+}
+
+.option-description {
+  margin: 6px 0 0 30px;
+  font-size: 12px;
+  color: #666;
+}

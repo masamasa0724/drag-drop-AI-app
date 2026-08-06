@@ -1,0 +1,76 @@
+.drop-zone {
+  border: 3px dashed #007bff;
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  background-color: #f8f9ff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.drop-zone.dragging {
+  border-color: #28a745;
+  background-color: #e8f5e9;
+  transform: scale(1.02);
+}
+
+.drop-content {
+  pointer-events: none;
+}
+
+.drop-icon {
+  font-size: 48px;
+  margin: 0 0 10px 0;
+}
+
+.drop-text {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin: 0 0 5px 0;
+}
+
+.drop-hint {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+.file-list {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.file-list h3 {
+  margin: 10px 0;
+  color: #333;
+}
+
+.file-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.file-list li {
+  padding: 8px 12px;
+  background-color: white;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  border-left: 4px solid #007bff;
+}
+
+.file-icon {
+  font-size: 18px;
+}
+
+.file-size {
+  color: #999;
+  font-size: 12px;
+  margin-left: auto;
+}
